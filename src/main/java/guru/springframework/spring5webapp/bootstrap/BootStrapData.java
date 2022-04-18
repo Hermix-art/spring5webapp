@@ -1,7 +1,7 @@
 package guru.springframework.spring5webapp.bootstrap;
 
-import guru.springframework.spring5webapp.domain.Author;
-import guru.springframework.spring5webapp.domain.Book;
+import guru.springframework.spring5webapp.model.Author;
+import guru.springframework.spring5webapp.model.Book;
 import guru.springframework.spring5webapp.repositories.AuthorRepository;
 import guru.springframework.spring5webapp.repositories.BookRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -23,7 +23,6 @@ public class BootStrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
         Author jack = new Author("Jack", "Keruak");
         Book unnamed = new Book("hello my friend", "2123");
         jack.getBooks().add(unnamed);
@@ -37,9 +36,12 @@ public class BootStrapData implements CommandLineRunner {
         irvin.getBooks().add(train);
         train.getAuthors().add(irvin);
 
+        authorRepository.save(irvin);
+        bookRepository.save(train);
+
         System.out.println("Started in bootstrap");
         System.out.println("Number of books: " + bookRepository.count());
-
+        System.out.println("Number of authors: " + authorRepository.count());
 
     }
 }
